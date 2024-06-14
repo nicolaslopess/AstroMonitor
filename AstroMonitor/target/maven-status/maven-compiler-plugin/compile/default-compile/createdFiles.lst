@@ -1,0 +1,4 @@
+br\com\astromonitor\astromonitor\JakartaRestConfiguration.class
+br\com\astromonitor\astromonitor\utils\StandardResponse.class
+br\com\astromonitor\astromonitor\resources\JakartaEE9Resource.class
+br\com\astromonitor\astromonitor\resources\TesteApi.class
