@@ -76,7 +76,7 @@ public class NasaApiController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getApiNasaAsteroids() {
         try {
-            String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=QoSXBccl5ZBDpnd66M7xwLq6I0Ake0hiV7hdZsTV";
+            String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=";
             
             
             
