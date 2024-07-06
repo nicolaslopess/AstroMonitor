@@ -23,11 +23,20 @@ import java.net.URL;
 
 public class NasaApiController {
 
+    public NasaApiController() {
+    }
+
     @GET
     @Path("/mensagem")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMensagem() {
         return Response.ok(new StandardResponse("Teste api nicolas")).build();
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfo() {
+        return "{\"message\":\"Hello from NASA API!\"}";
     }
 
     @GET
