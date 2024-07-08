@@ -20,7 +20,11 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>br.com.astromonitor.astromonitor.resources.service.api.nasa</param-value>
+            <param-value>
+                br.com.astromonitor.astromonitor.resources.service.api.nasa,
+                br.com.astromonitor.astromonitor.resources.service.api.planetario,
+                br.com.astromonitor.astromonitor.resources.service.api.usuario
+            </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

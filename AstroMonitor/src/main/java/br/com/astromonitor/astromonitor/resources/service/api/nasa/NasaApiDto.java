@@ -4,43 +4,40 @@
  */
 package br.com.astromonitor.astromonitor.resources.service.api.nasa;
 
+
+import java.sql.Date;
+
 /**
  *
  * @author Nicolas
  */
 public class NasaApiDto {
-    private String id;
-    private String neoReferenceId;
-    private String name;
+   
+    private Integer idObjetoNasa;
+    private String nomeAsteroid;
     private String nasaJplUrl;
-    private double absoluteMagnitudeH;
-//    private EstimatedDiameter estimatedDiameter;
-    private boolean isPotentiallyHazardousAsteroid;
-//    private List<NEOCloseApproachData> closeApproachData;
-    private boolean isSentryObject;
+    private Double diameterMinM;
+    private Double diameterMaxM;
+    private Boolean risco;
+    private Date dataAproximacao;
+    private Double velocidade;
+    private Double distanciaDaTerra;
+    private String orbitando;
 
-    public String getId() {
-        return id;
+    public Integer getIdObjetoNasa() {
+        return idObjetoNasa;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdObjetoNasa(Integer idObjetoNasa) {
+        this.idObjetoNasa = idObjetoNasa;
     }
 
-    public String getNeoReferenceId() {
-        return neoReferenceId;
+    public String getNomeAsteroid() {
+        return nomeAsteroid;
     }
 
-    public void setNeoReferenceId(String neoReferenceId) {
-        this.neoReferenceId = neoReferenceId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNomeAsteroid(String nomeAsteroid) {
+        this.nomeAsteroid = nomeAsteroid;
     }
 
     public String getNasaJplUrl() {
@@ -51,29 +48,63 @@ public class NasaApiDto {
         this.nasaJplUrl = nasaJplUrl;
     }
 
-    public double getAbsoluteMagnitudeH() {
-        return absoluteMagnitudeH;
+    public Double getDiameterMinM() {
+        return diameterMinM;
     }
 
-    public void setAbsoluteMagnitudeH(double absoluteMagnitudeH) {
-        this.absoluteMagnitudeH = absoluteMagnitudeH;
+    public void setDiameterMinM(Double diameterMinM) {
+        this.diameterMinM = diameterMinM;
     }
 
-    public boolean isIsPotentiallyHazardousAsteroid() {
-        return isPotentiallyHazardousAsteroid;
+    public Double getDiameterMaxM() {
+        return diameterMaxM;
     }
 
-    public void setIsPotentiallyHazardousAsteroid(boolean isPotentiallyHazardousAsteroid) {
-        this.isPotentiallyHazardousAsteroid = isPotentiallyHazardousAsteroid;
+    public void setDiameterMaxM(Double diameterMaxM) {
+        this.diameterMaxM = diameterMaxM;
     }
 
-    public boolean isIsSentryObject() {
-        return isSentryObject;
+    public Boolean getRisco() {
+        return risco;
     }
 
-    public void setIsSentryObject(boolean isSentryObject) {
-        this.isSentryObject = isSentryObject;
+    public void setRisco(Boolean risco) {
+        this.risco = risco;
     }
+
+    public Date getDataAproximacao() {
+        return dataAproximacao;
+    }
+
+    public void setDataAproximacao(Date dataAproximacao) {
+        this.dataAproximacao = dataAproximacao;
+    }
+
+    public Double getVelocidade() {
+        return velocidade;
+    }
+
+    public void setVelocidade(Double velocidade) {
+        this.velocidade = velocidade;
+    }
+
+    public Double getDistanciaDaTerra() {
+        return distanciaDaTerra;
+    }
+
+    public void setDistanciaDaTerra(Double distanciaDaTerra) {
+        this.distanciaDaTerra = distanciaDaTerra;
+    }
+
+    public String getOrbitando() {
+        return orbitando;
+    }
+
+    public void setOrbitando(String orbitando) {
+        this.orbitando = orbitando;
+    }
+
+    
     
     
 }

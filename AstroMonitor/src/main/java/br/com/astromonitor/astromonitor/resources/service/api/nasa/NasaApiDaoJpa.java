@@ -10,68 +10,68 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author Nicolas
  */
 public class NasaApiDaoJpa {
-    
+
     private ConnectionDB connectionDB;
-    
+
     public NasaApiDaoJpa() {
         this.connectionDB = new ConnectionDB();
     }
 
-    public StandardResponse create(String someData) {
-        String sql = "INSERT INTO your_table_name (column_name) VALUES (?)";
-        
-        try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-             
-            preparedStatement.setString(1, someData);
-            int rowsAffected = preparedStatement.executeUpdate();
+    public void create(List<NasaApiDto> dto) {
+        String sql = "INSERT INTO asteroids (id_objeto_nasa, nome_asteroid, nasa_jpl_url, diameter_min_m, diameter_max_m, "
+                + "risco, data_aproximacao, velocidade, distancia_da_terra, orbitando) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                + "ON DUPLICATE KEY UPDATE nome_asteroid=VALUES(nome_asteroid), nasa_jpl_url=VALUES(nasa_jpl_url),"
+                + "diameter_min_m=VALUES(diameter_min_m), diameter_max_m=VALUES(diameter_max_m),"
+                + "risco=VALUES(risco), velocidade=VALUES(velocidade), distancia_da_terra=VALUES(distancia_da_terra),"
+                + "orbitando=VALUES(orbitando)";
 
-            if (rowsAffected > 0) {
-                return new StandardResponse("Success");
-            } else {
-                return new StandardResponse("Error");
+        try ( Connection connection = connectionDB.getConnection();  PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            for (NasaApiDto nasaApiDto : dto) {
+                preparedStatement.setInt(1, nasaApiDto.getIdObjetoNasa());
+                preparedStatement.setString(2, nasaApiDto.getNomeAsteroid());
+                preparedStatement.setString(3, nasaApiDto.getNasaJplUrl());
+                preparedStatement.setDouble(4, nasaApiDto.getDiameterMinM());
+                preparedStatement.setDouble(5, nasaApiDto.getDiameterMaxM());
+                preparedStatement.setBoolean(6, nasaApiDto.getRisco());
+                preparedStatement.setDate(7, nasaApiDto.getDataAproximacao());
+                preparedStatement.setDouble(8, nasaApiDto.getVelocidade());
+                preparedStatement.setDouble(9, nasaApiDto.getDistanciaDaTerra());
+                preparedStatement.setString(10, nasaApiDto.getOrbitando());
+                
+                preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return new StandardResponse("Database error: " + e.getMessage());
         }
     }
-    
+
     public Object[] read() {
-        String sql = "SELECT * FROM asteroids";
-        
-        try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        String sql = "SELECT * FROM asteroids;";
+
+        try ( Connection connection = connectionDB.getConnection();  PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
-           if (resultSet.next()) {
+            while (resultSet.next()) {
                 int columnCount = resultSet.getMetaData().getColumnCount();
                 Object[] result = new Object[columnCount];
                 for (int i = 1; i <= columnCount; i++) {
                     result[i - 1] = resultSet.getObject(i);
                 }
                 return result;
-            } else {
-                return new Object[]{"No record found with ID: "};
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return new Object[]{"Database error: " + e.getMessage()};
         }
+        return null;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

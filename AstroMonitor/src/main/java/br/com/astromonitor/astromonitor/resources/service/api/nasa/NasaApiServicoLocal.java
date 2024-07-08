@@ -15,5 +15,5 @@ import javax.ejb.Local;
 @Local
 public interface NasaApiServicoLocal {
     
-    public String cadastrarDadosConsultaApi();
+    public String cadastrarDadosConsultaApi(String dataInicio);
 }

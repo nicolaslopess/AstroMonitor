@@ -4,9 +4,8 @@
  */
 package br.com.astromonitor.astromonitor.resources.service.api.nasa;
 
-import br.com.astromonitor.astromonitor.resources.service.api.Controller.AstroMonitorController;
+import br.com.astromonitor.astromonitor.resources.service.api.controller.AstroMonitorController;
 import br.com.astromonitor.astromonitor.utils.StandardResponse;
-import br.com.astromonitor.astromonitor.resources.service.api.nasa.NasaApiServicoLocal;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,7 +16,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import javax.inject.Inject;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -69,16 +68,14 @@ public class NasaApiController extends AstroMonitorController{
     @GET
     @Path("/nasa")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getNasaData() {
+    public Response getNasaData(@QueryParam("date") String dateStr) { //http://your-server/nasa?date=2024-07-07
         try {
             
             NasaApiServicoEjb nasaApiServico = new NasaApiServicoEjb();
+            
+            nasaApiServico.cadastrarDadosConsultaApi(dateStr);
 
-//            String teste = nasaApiServico.cadastrarDadosConsultaApi();
-            Object[] nsas = nasaApiServico.consulta();
-//            System.out.println(nasaApiServico.consulta());
-
-            return Response.ok("tentativa de conectar no banco").build();
+            return Response.ok("Dados Atualizado").build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
