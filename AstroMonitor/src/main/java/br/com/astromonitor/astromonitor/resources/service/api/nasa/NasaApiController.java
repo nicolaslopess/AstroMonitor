@@ -4,7 +4,9 @@
  */
 package br.com.astromonitor.astromonitor.resources.service.api.nasa;
 
+import br.com.astromonitor.astromonitor.resources.service.api.controller.AstroMonitorController;
 import br.com.astromonitor.astromonitor.utils.StandardResponse;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,17 +16,23 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.ws.rs.QueryParam;
 
 /**
  *
  * @author Nicolas
  */
 @Path("/recurso")
+public class NasaApiController extends AstroMonitorController{
+    
 
-public class NasaApiController {
-
-    public NasaApiController() {
-    }
+//    private NasaApiServicoLocal nasaApiServico;
+//
+//    public NasaApiController() {}
+//    
+//   public NasaApiController(NasaApiServicoLocal nasaApiServicoLocal) {
+//        this.nasaApiServico = nasaApiServicoLocal;
+//    }
 
     @GET
     @Path("/mensagem")
@@ -60,20 +68,14 @@ public class NasaApiController {
     @GET
     @Path("/nasa")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getNasaData() {
+    public Response getNasaData(@QueryParam("date") String date_inicio,@QueryParam("datefim") String date_fim) { //http://localhost:8080/api/recurso/nasa?date=2024-07-07&datefim=2024-07-07
         try {
-            String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=";
-            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuilder content = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-            in.close();
-            connection.disconnect();
-            return Response.ok(content.toString()).build();
+            
+            NasaApiServicoEjb nasaApiServico = new NasaApiServicoEjb();
+            
+            nasaApiServico.cadastrarDadosConsultaApi(date_inicio);
+
+            return Response.ok("Dados Atualizado").build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
@@ -85,7 +87,7 @@ public class NasaApiController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getApiNasaAsteroids() {
         try {
-            String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=";
+            String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY";
 
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("GET");
@@ -97,6 +99,7 @@ public class NasaApiController {
             }
             in.close();
             connection.disconnect();
+
             return Response.ok(content.toString()).build();
         } catch (Exception e) {
             e.printStackTrace();
