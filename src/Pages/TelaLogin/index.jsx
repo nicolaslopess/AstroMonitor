@@ -4,6 +4,7 @@ import Api, { exceptionNotificationAPI } from '../../Api';
 import { useNavigate } from 'react-router-dom';
 import { useStyles } from './styles';
 import Senha from '../../Componentes/Senha';
+import axios from 'axios';
 
 const TelaLogin = () => {
   const styles = useStyles();
@@ -35,18 +36,38 @@ const TelaLogin = () => {
 
     setLoading(true);
     try {
-      const data = {
-        login: usuario,
-        senha: senha
+      const response = await fetch('http://localhost:8080/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // Ajuste aqui: mudando as chaves para 'login' e 'senha'
+        body: JSON.stringify({ login: usuario, senha: senha }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Failed to login:', errorData.message);
+        setError(errorData.message);
+        setLoading(false);
+        return;
       }
-      const response = await Api.post(`/login`, data);
-      console.log('Login bem-sucedido:', response.data);
-      navigate('/');
+
+      const data = await response.json();
+      console.log('Login successful', data);
+      setLoading(false);
+      return {
+        login: usuario,
+        senha: senha,
+      };
     } catch (error) {
-      exceptionNotificationAPI(error);
+      console.error('Error logging in', error);
+      setError('Login failed due to an error.');
+      setLoading(false);
     }
-    setLoading(false);
   };
+
+
 
   const registrarUsuario = () => {
     navigate('/registro');

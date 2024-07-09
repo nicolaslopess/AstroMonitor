@@ -17,7 +17,7 @@ const Results = () => {
     const atualizarDados = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('api'); 
+        const response = await axios.get(`http://localhost:8080/api/planetario/recentes`); 
         setResultados(response.data);
       } catch (error) {
         console.error('Erro ao atualizar dados:', error);
