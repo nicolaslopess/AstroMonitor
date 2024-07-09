@@ -4,6 +4,7 @@
  */
 package br.com.astromonitor.astromonitor.resources.service.api.planetario;
 
+import br.com.astromonitor.astromonitor.resources.service.api.nasa.NasaApiDto;
 import br.com.astromonitor.astromonitor.utils.ConnectionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,12 +46,44 @@ public class PlanetarioDaoJpa {
 
             while (resultSet.next()) {
                 PlanetarioAtividadesRecentesDto frequency = new PlanetarioAtividadesRecentesDto();
-                frequency.setDataAproximacao(resultSet.getDate("data_aproximacao"));
+                frequency.setDataAproximacao(resultSet.getString("data_aproximacao"));
                 frequency.setNumeroDeObjetosDetectados(resultSet.getInt("numero_de_objetos_detectados"));
                 lista.add(frequency);
             }
         }
         return lista;
+    }
+
+    public List<NasaApiDto> getAsteroidesProximosTerra(String dataInicio, String dataFim) {
+        String sql = "SELECT * FROM asteroids WHERE data_aproximacao BETWEEN ? AND ?";
+
+        List<NasaApiDto> asteroids = new ArrayList<>();
+        try ( Connection connection = connectionDB.getConnection()) {
+
+            try ( PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, dataInicio);
+                statement.setString(2, dataFim);
+                try ( ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        NasaApiDto asteroid = new NasaApiDto();
+                        asteroid.setIdObjetoNasa(resultSet.getInt("id_objeto_nasa"));
+                        asteroid.setNomeAsteroid(resultSet.getString("nome_asteroid"));
+                        asteroid.setNasaJplUrl(resultSet.getString("nasa_jpl_url"));
+                        asteroid.setDiameterMinM(resultSet.getDouble("diameter_min_m"));
+                        asteroid.setDiameterMaxM(resultSet.getDouble("diameter_max_m"));
+                        asteroid.setRisco(resultSet.getBoolean("risco"));
+                        asteroid.setDataAproximacao(resultSet.getDate("data_aproximacao"));
+                        asteroid.setVelocidade(resultSet.getDouble("velocidade"));
+                        asteroid.setDistanciaDaTerra(resultSet.getDouble("distancia_da_terra"));
+                        asteroid.setOrbitando(resultSet.getString("orbitando"));
+                        asteroids.add(asteroid);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return asteroids;
     }
 
 }

@@ -11,14 +11,14 @@ import java.sql.Date;
  * @author Nicolas
  */
 public class PlanetarioAtividadesRecentesDto {
-    private Date dataAproximacao;
+    private String  dataAproximacao;
     private int numeroDeObjetosDetectados;
 
-    public Date getDataAproximacao() {
+    public String  getDataAproximacao() {
         return dataAproximacao;
     }
 
-    public void setDataAproximacao(Date dataAproximacao) {
+    public void setDataAproximacao(String  dataAproximacao) {
         this.dataAproximacao = dataAproximacao;
     }
 
