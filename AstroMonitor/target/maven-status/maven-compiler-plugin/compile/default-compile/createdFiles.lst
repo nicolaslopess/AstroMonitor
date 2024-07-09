@@ -1,3 +1,4 @@
+br\com\astromonitor\astromonitor\resources\service\api\planetario\PlanetarioRecentActivity.class
 br\com\astromonitor\astromonitor\resources\service\api\usuario\UsuarioDaoJpa.class
 br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiServicoEjb.class
 br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiServicoLocal.class

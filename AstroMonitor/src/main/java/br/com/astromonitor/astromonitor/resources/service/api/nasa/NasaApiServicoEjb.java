@@ -66,8 +66,8 @@ public class NasaApiServicoEjb implements NasaApiServicoLocal{
     
     private List<NasaApiDto> getApiNasaAsteroids(String dataInicio, String dataFim, String KEY){
         
-//        String dataInicio = "2024-07-05";
-//        String dataFim = "2024-07-06";
+         dataInicio = "2024-07-08";
+         dataFim = "2024-07-13";
 
             if (KEY.equals("")) {
                 KEY = "DEMO_KEY";

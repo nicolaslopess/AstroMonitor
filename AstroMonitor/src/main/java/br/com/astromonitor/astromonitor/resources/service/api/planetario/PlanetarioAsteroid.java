@@ -1,6 +1,6 @@
 package br.com.astromonitor.astromonitor.resources.service.api.planetario;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class PlanetarioAsteroid {
     private int id;
@@ -14,6 +14,8 @@ public class PlanetarioAsteroid {
     private float velocidade;
     private float distanciaDaTerra;
     private String orbitando;
+
+    // Getters e setters
 
     public int getId() {
         return id;
@@ -102,6 +104,4 @@ public class PlanetarioAsteroid {
     public void setOrbitando(String orbitando) {
         this.orbitando = orbitando;
     }
-
-    
 }

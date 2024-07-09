@@ -5,10 +5,10 @@
 package br.com.astromonitor.astromonitor.resources.service.api.planetario;
 
 import br.com.astromonitor.astromonitor.resources.service.api.controller.AstroMonitorController;
-import br.com.astromonitor.astromonitor.resources.service.api.nasa.NasaApiServicoEjb;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -21,23 +21,49 @@ public class PlanetarioController extends AstroMonitorController {
     public Response getInfo() {
         PlanetarioAsteroidDAO asteroidDAO = new PlanetarioAsteroidDAO();
         List<PlanetarioAsteroid> asteroids = asteroidDAO.getAllAsteroids();
+        if (asteroids == null) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao obter dados dos asteroides").build();
+        }
         return Response.ok(asteroids).build();
     }
 
     @GET
-    @Path("/nasa")
+    @Path("/range")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getNasaData() {
-        try {
-            NasaApiServicoEjb nasaApiServico = new NasaApiServicoEjb();
-            nasaApiServico.cadastrarDadosConsultaApi("");
-            return Response.ok("Dados Atualizado").build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+    public Response getAsteroidsByDateRange(@QueryParam("startDate") String startDate, @QueryParam("endDate") String endDate) {
+        PlanetarioAsteroidDAO asteroidDAO = new PlanetarioAsteroidDAO();
+        List<PlanetarioAsteroid> asteroids = asteroidDAO.getAsteroidsByDateRange(startDate, endDate);
+        if (asteroids == null) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao obter dados dos asteroides").build();
         }
+        return Response.ok(asteroids).build();
+    }
+
+    @GET
+    @Path("/upcoming")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUpcomingAsteroids() {
+        PlanetarioAsteroidDAO asteroidDAO = new PlanetarioAsteroidDAO();
+        List<PlanetarioAsteroid> asteroids = asteroidDAO.getUpcomingAsteroids();
+        if (asteroids == null) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao obter dados dos asteroides").build();
+        }
+        return Response.ok(asteroids).build();
+    }
+
+    @GET
+    @Path("/recent")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecentActivity() {
+        PlanetarioAsteroidDAO asteroidDAO = new PlanetarioAsteroidDAO();
+        List<PlanetarioRecentActivity> activities = asteroidDAO.getRecentActivity();
+        if (activities == null) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao obter dados das atividades recentes").build();
+        }
+        return Response.ok(activities).build();
     }
 }
+
 
    
     
