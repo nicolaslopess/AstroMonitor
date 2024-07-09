@@ -5,10 +5,7 @@
 package br.com.astromonitor.astromonitor.resources.service.api.usuario;
 
 import br.com.astromonitor.astromonitor.utils.Token;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
