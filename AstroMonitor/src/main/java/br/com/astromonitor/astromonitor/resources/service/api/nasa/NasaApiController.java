@@ -64,16 +64,16 @@ public class NasaApiController extends AstroMonitorController{
 //        }
         return Response.ok("restosta").build();
     }
-
+// consulta no banco e passar pro front
     @GET
     @Path("/nasa")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getNasaData(@QueryParam("date") String date_inicio,@QueryParam("datefim") String date_fim) { //http://localhost:8080/api/recurso/nasa?date=2024-07-07&datefim=2024-07-07
+    public Response getNasaData() { //http://localhost:8080/api/recurso/nasa?date=2024-07-07&datefim=2024-07-07
         try {
             
             NasaApiServicoEjb nasaApiServico = new NasaApiServicoEjb();
             
-            nasaApiServico.cadastrarDadosConsultaApi(date_inicio);
+            nasaApiServico.cadastrarDadosConsultaApi("");
 
             return Response.ok("Dados Atualizado").build();
         } catch (Exception e) {

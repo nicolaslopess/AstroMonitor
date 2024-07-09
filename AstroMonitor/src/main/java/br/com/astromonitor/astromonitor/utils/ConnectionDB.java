@@ -18,7 +18,7 @@ public class ConnectionDB {
 
     private final String JDBC_URL = "jdbc:mysql://localhost/" + "astromonitor";
     private final String JDBC_USER = "root";
-    private final String JDBC_PASSWORD = "root";//lab unisc e vazio
+    private final String JDBC_PASSWORD = "";//lab unisc e vazio
     
     public Connection getConnection() throws SQLException {
         try {

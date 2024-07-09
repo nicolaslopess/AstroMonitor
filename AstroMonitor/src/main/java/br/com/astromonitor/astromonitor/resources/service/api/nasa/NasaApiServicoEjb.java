@@ -33,12 +33,12 @@ public class NasaApiServicoEjb implements NasaApiServicoLocal{
         
         NasaApiDaoJpa dao = new NasaApiDaoJpa();
         
-//        String dataInicio = "2024-07-03";
-        String dataFim = "";//= "2024-07-04";
+        String dataIn = "2024-07-03";
+        String dataFim = "2024-07-04";
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-            Date date;
+/*            Date date;
         try {
             date = (Date) dateFormat.parse(dataInicio);
             Calendar calendar = Calendar.getInstance();
@@ -49,9 +49,9 @@ public class NasaApiServicoEjb implements NasaApiServicoLocal{
             dataFim = dateFormat.format(newDate);
         } catch (ParseException ex) {
             Logger.getLogger(NasaApiServicoEjb.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
-        dao.create(getApiNasaAsteroids(dataInicio, dataFim, ""));
+        dao.create(getApiNasaAsteroids(dataIn, dataFim, ""));
        
         return null;
     }

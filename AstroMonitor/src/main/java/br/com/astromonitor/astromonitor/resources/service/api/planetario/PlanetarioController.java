@@ -5,23 +5,40 @@
 package br.com.astromonitor.astromonitor.resources.service.api.planetario;
 
 import br.com.astromonitor.astromonitor.resources.service.api.controller.AstroMonitorController;
+import br.com.astromonitor.astromonitor.resources.service.api.nasa.NasaApiServicoEjb;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
-/**
- *
- * @author Nicolas
- */
 @Path("/planetario")
-public class PlanetarioController extends AstroMonitorController {// classe desenvolvida para fornecer toda a parte de orientação de asteroides ao redor da terra
-    
+public class PlanetarioController extends AstroMonitorController {
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getInfo() {
-        return "{\"message\":\"Teste Planetario\"}";
+    public Response getInfo() {
+        PlanetarioAsteroidDAO asteroidDAO = new PlanetarioAsteroidDAO();
+        List<PlanetarioAsteroid> asteroids = asteroidDAO.getAllAsteroids();
+        return Response.ok(asteroids).build();
     }
+
+    @GET
+    @Path("/nasa")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getNasaData() {
+        try {
+            NasaApiServicoEjb nasaApiServico = new NasaApiServicoEjb();
+            nasaApiServico.cadastrarDadosConsultaApi("");
+            return Response.ok("Dados Atualizado").build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+}
+
    
     
 //    select para pegar todos os objetos proximos a terra
@@ -46,5 +63,3 @@ public class PlanetarioController extends AstroMonitorController {// classe dese
 //    data_aprocimacao
 //ORDER BY 
 //    data_aprocimacao DESC;
-
-}
