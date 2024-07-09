@@ -4,7 +4,11 @@
  */
 package br.com.astromonitor.astromonitor.resources.service.api.usuario;
 
+import br.com.astromonitor.astromonitor.utils.Token;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,14 +27,24 @@ public class UsuarioServicoEjb {
         }
     }
 
-    public String authenticate(LoginDto loginDto){
+    public String authenticate(LoginDto loginDto) {
         try {
             UsuarioDaoJpa dao = new UsuarioDaoJpa();
-            return dao.authenticate(loginDto);
+            Object[] retorno = dao.authenticate(loginDto);
+            
+            Token t = new Token();
+            String token = t.generateToken(retorno[1].toString());
+            t.storeToken((int) retorno[0], token);
+            return token;
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioServicoEjb.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
+    public boolean verificarToken(String token) {
+        Token t = new Token();
+        return t.isValidToken(t.removeBearerPrefix(token));
+    }
+
 }

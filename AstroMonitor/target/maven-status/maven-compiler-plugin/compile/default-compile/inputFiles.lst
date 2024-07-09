@@ -1,8 +1,9 @@
 C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiConversorFactory.java
 C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\resources\service\api\usuario\UsuarioServicoEjb.java
 C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\resources\service\api\controller\AstroMonitorController.java
+C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\utils\dao\TokenDao.java
+C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\utils\Token.java
 C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiDto.java
-C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiServicoLocal.java
 C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\resources\service\api\usuario\UsuarioDaoJpa.java
 C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\utils\ConnectionDB.java
 C:\Users\Nicolas\Desktop\git\AstroMonitor\AstroMonitor\src\main\java\br\com\astromonitor\astromonitor\resources\service\api\usuario\UsuarioDto.java

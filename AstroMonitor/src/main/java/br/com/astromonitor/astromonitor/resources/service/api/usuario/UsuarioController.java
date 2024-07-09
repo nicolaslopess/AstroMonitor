@@ -5,11 +5,15 @@
 package br.com.astromonitor.astromonitor.resources.service.api.usuario;
 
 import br.com.astromonitor.astromonitor.utils.StandardResponse;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -19,12 +23,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("/user")
 public class UsuarioController {
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfo() {
-        return "{\"message\":\"teste user\"}";
-    }
-    
+
     @POST
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -51,17 +50,43 @@ public class UsuarioController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(LoginDto loginDto) {
+//  Json que devo receber do front
+//    {
+//    "login": "login_do_usuario",
+//    "senha": "senha_secreta",
+//    }
         try {
             UsuarioServicoEjb servico = new UsuarioServicoEjb();
             String token = servico.authenticate(loginDto);
-//            Map<String, String> response = new HashMap<>();
-//            response.put("token", token);
-//            return Response.ok(response).build();
-return null;
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            return Response.ok(response).build();
         } catch (Exception e) {
             return Response.status(Response.Status.UNAUTHORIZED).entity(new StandardResponse(e.getMessage())).build();
         }
     }
     
-    
+    @POST
+    @Path("/verificar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verificarUser(@Context HttpHeaders headers) {
+        
+        String token = headers.getHeaderString("Authorization");
+
+        if (token == null || token.isEmpty()) {
+            return Response.status(Response.Status.UNAUTHORIZED).entity("Token is missing").build();
+        }
+
+        try {
+            UsuarioServicoEjb servico = new UsuarioServicoEjb();
+            if(servico.verificarToken(token)){
+               return Response.ok(new StandardResponse("Token valido")).build();
+            } else {
+                return Response.status(Response.Status.UNAUTHORIZED).entity(new StandardResponse("Token Invalido")).build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.UNAUTHORIZED).entity(new StandardResponse(e.getMessage())).build();
+        }
+    }
 }

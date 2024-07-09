@@ -1,10 +1,11 @@
 br\com\astromonitor\astromonitor\resources\service\api\usuario\UsuarioDaoJpa.class
+br\com\astromonitor\astromonitor\utils\dao\TokenDao.class
 br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiServicoEjb.class
-br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiServicoLocal.class
 br\com\astromonitor\astromonitor\resources\service\api\usuario\UsuarioServicoEjb.class
 br\com\astromonitor\astromonitor\utils\dao\AstroMonitorDAO.class
 br\com\astromonitor\astromonitor\utils\StandardResponse.class
 br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiController.class
+br\com\astromonitor\astromonitor\utils\Token.class
 br\com\astromonitor\astromonitor\resources\service\api\nasa\NasaApiConversorFactory.class
 br\com\astromonitor\astromonitor\resources\service\api\usuario\LoginDto.class
 br\com\astromonitor\astromonitor\resources\service\api\planetario\PlanetarioController.class

@@ -5,6 +5,7 @@
 package br.com.astromonitor.astromonitor.resources.service.api.nasa;
 
 
+import br.com.astromonitor.astromonitor.utils.Token;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -25,34 +26,20 @@ import org.json.JSONObject;
  * @author Nicolas
  */
 
-public class NasaApiServicoEjb implements NasaApiServicoLocal{
+public class NasaApiServicoEjb{
 
-   
-    @Override
-    public String cadastrarDadosConsultaApi(String dataInicio) {
+    public String cadastrarDadosConsultaApi(String dataInicio, String dataFim, String tokenFront) {
         
+        Token t = new Token();
         NasaApiDaoJpa dao = new NasaApiDaoJpa();
-        
-//        String dataInicio = "2024-07-03";
-        String dataFim = "";//= "2024-07-04";
-        
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-            Date date;
+        String chaveApi = "";
         try {
-            date = (Date) dateFormat.parse(dataInicio);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.add(Calendar.DAY_OF_MONTH, -1);
-
-            Date newDate = (Date) calendar.getTime();
-            dataFim = dateFormat.format(newDate);
-        } catch (ParseException ex) {
-            Logger.getLogger(NasaApiServicoEjb.class.getName()).log(Level.SEVERE, null, ex);
+            chaveApi = t.getChaveApiByToken(t.removeBearerPrefix(tokenFront));
+        } catch (Exception e) {
+            return null;
         }
         
-        dao.create(getApiNasaAsteroids(dataInicio, dataFim, ""));
-       
+        dao.create(getApiNasaAsteroids(dataInicio, dataFim, chaveApi));
         return null;
     }
 
@@ -66,13 +53,6 @@ public class NasaApiServicoEjb implements NasaApiServicoLocal{
     
     private List<NasaApiDto> getApiNasaAsteroids(String dataInicio, String dataFim, String KEY){
         
-//        String dataInicio = "2024-07-05";
-//        String dataFim = "2024-07-06";
-
-            if (KEY.equals("")) {
-                KEY = "DEMO_KEY";
-            }
-
          try {
             String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date="+ dataInicio + "&end_date="+ dataFim +"&api_key=" + KEY;
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();

@@ -28,14 +28,14 @@ public class NasaApiConversorFactory {
                 JSONObject asteroid = dateArray.getJSONObject(i);
 
                 NasaApiDto nasaApiDto = new NasaApiDto();
-                nasaApiDto.setIdObjetoNasa(asteroid.getInt("id")); // Convertendo para Integer
+                nasaApiDto.setIdObjetoNasa(asteroid.getInt("id"));
                 nasaApiDto.setNomeAsteroid(asteroid.getString("name"));
                 nasaApiDto.setNasaJplUrl(asteroid.getString("nasa_jpl_url"));
                 nasaApiDto.setRisco(asteroid.getBoolean("is_potentially_hazardous_asteroid"));
 
                 JSONObject closeApproachData = asteroid.getJSONArray("close_approach_data").getJSONObject(0);
                 String closeApproachDateStr = closeApproachData.getString("close_approach_date");
-                Date closeApproachDate = Date.valueOf(closeApproachDateStr); // Convertendo para Date
+                Date closeApproachDate = Date.valueOf(closeApproachDateStr);
                 nasaApiDto.setDataAproximacao(closeApproachDate);
 
                 nasaApiDto.setDistanciaDaTerra(closeApproachData.getJSONObject("miss_distance").getDouble("kilometers"));
@@ -45,7 +45,7 @@ public class NasaApiConversorFactory {
                 nasaApiDto.setDiameterMinM(estimatedDiameter.getDouble("estimated_diameter_min"));
                 nasaApiDto.setDiameterMaxM(estimatedDiameter.getDouble("estimated_diameter_max"));
 
-                nasaApiDto.setOrbitando(closeApproachData.getString("orbiting_body")); // Corrigindo para usar o campo correto
+                nasaApiDto.setOrbitando(closeApproachData.getString("orbiting_body"));
 
                 retorno.add(nasaApiDto);
             }
