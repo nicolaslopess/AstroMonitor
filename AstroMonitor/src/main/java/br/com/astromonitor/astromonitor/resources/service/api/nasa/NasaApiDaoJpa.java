@@ -5,7 +5,6 @@
 package br.com.astromonitor.astromonitor.resources.service.api.nasa;
 
 import br.com.astromonitor.astromonitor.utils.ConnectionDB;
-import br.com.astromonitor.astromonitor.utils.StandardResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

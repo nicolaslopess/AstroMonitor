@@ -10,15 +10,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.Stateless;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -34,13 +28,14 @@ public class NasaApiServicoEjb{
         NasaApiDaoJpa dao = new NasaApiDaoJpa();
         String chaveApi = "";
         try {
-            chaveApi = t.getChaveApiByToken(t.removeBearerPrefix(tokenFront));
+            String tokenAlterado = t.removeBearerPrefix(tokenFront);
+            chaveApi = t.getChaveApiByToken(tokenAlterado);
         } catch (Exception e) {
-            return null;
+            return "Tokn invalido";
         }
         
         dao.create(getApiNasaAsteroids(dataInicio, dataFim, chaveApi));
-        return null;
+        return "Dados Atualizado";
     }
 
     public Object[] consulta() {
@@ -75,5 +70,24 @@ public class NasaApiServicoEjb{
             return null;
         }
     }
-    
+
+    public String cadastrarDadosConsultaApiAuto(String token) {
+        LocalDate today = LocalDate.now();
+        
+        LocalDate startDate = today.minusDays(7);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        String dataInicio = startDate.format(formatter);
+        String dataFim = today.format(formatter);
+        
+        String retorno = cadastrarDadosConsultaApi(dataInicio, dataFim, token);
+        
+        startDate = today.plusDays(4);
+        dataInicio = today.format(formatter);
+        dataFim = startDate.format(formatter);
+        
+        retorno = cadastrarDadosConsultaApi(dataInicio, dataFim, token);
+        
+        return retorno;
+    }
 }

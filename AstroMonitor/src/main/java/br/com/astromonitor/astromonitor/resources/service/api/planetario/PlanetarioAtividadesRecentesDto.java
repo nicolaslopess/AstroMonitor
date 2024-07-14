@@ -4,8 +4,6 @@
  */
 package br.com.astromonitor.astromonitor.resources.service.api.planetario;
 
-import java.sql.Date;
-
 /**
  *
  * @author Nicolas

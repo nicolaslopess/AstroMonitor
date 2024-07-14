@@ -18,11 +18,11 @@ public class ConnectionDB {
 
     private final String JDBC_URL = "jdbc:mysql://localhost/" + "astromonitor";
     private final String JDBC_USER = "root";
-    private final String JDBC_PASSWORD = "root";//lab unisc e vazio
+    private final String JDBC_PASSWORD = "admin";
     
     public Connection getConnection() throws SQLException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");//com.mysql.cj.jdbc.Driver
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         }

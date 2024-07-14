@@ -54,15 +54,33 @@ public class PlanetarioDaoJpa {
         return lista;
     }
 
-    public List<NasaApiDto> getAsteroidesProximosTerra(String dataInicio, String dataFim) {
-        String sql = "SELECT * FROM asteroids WHERE data_aproximacao BETWEEN ? AND ?";
+    public Integer getAsteroidesProximosTerra() {
+        String sql = "SELECT count(*) as total_objetos_proximos FROM asteroids WHERE data_aproximacao  = DATE_FORMAT(NOW(), '%Y-%m-%d')";
+        
+        Integer count = 0;
+       
+        try ( Connection connection = connectionDB.getConnection()) {
+
+            try ( PreparedStatement statement = connection.prepareStatement(sql)) {
+                try ( ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        count = resultSet.getInt("total_objetos_proximos");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public List<NasaApiDto> getListaAproximacoesFuturas() {
+        String sql = "SELECT * FROM asteroids WHERE data_aproximacao >= now()";
 
         List<NasaApiDto> asteroids = new ArrayList<>();
         try ( Connection connection = connectionDB.getConnection()) {
 
             try ( PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, dataInicio);
-                statement.setString(2, dataFim);
                 try ( ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
                         NasaApiDto asteroid = new NasaApiDto();
@@ -85,5 +103,4 @@ public class PlanetarioDaoJpa {
         }
         return asteroids;
     }
-
 }
