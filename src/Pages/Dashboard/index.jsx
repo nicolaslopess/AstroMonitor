@@ -42,7 +42,7 @@ const Dashboard = () => {
           </Grid>
           <Grid item xs={12} md={0} style={{marginTop:"-4%"}} className={styles.boxes}>
             <Box style={{ WebkitUserSelect:"none" }}>
-              <ObjetosProximos count={42} />
+              <ObjetosProximos />
             </Box>
           </Grid>
           <Grid item xs={12} md={0} className={styles.boxes}>
