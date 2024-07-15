@@ -75,7 +75,7 @@ public class PlanetarioDaoJpa {
     }
 
     public List<NasaApiDto> getListaAproximacoesFuturas() {
-        String sql = "SELECT * FROM asteroids WHERE data_aproximacao >= now()";
+        String sql = "SELECT * FROM asteroids WHERE data_aproximacao >= CURDATE()";
 
         List<NasaApiDto> asteroids = new ArrayList<>();
         try ( Connection connection = connectionDB.getConnection()) {

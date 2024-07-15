@@ -28,8 +28,8 @@ public class NasaApiController {
         
         String token = headers.getHeaderString("Authorization");
 
-        if (token == null || token.isEmpty()) {
-            return Response.status(Response.Status.UNAUTHORIZED).entity("Token invalido").build();
+        if (token == null || !token.startsWith("Bearer ")) {
+            return Response.status(Response.Status.UNAUTHORIZED).entity("Token inválido ou ausente").build();
         }
         
         try {
