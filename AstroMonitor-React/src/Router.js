@@ -13,9 +13,9 @@ const AppRouter = () => {
       <Routes>
         <Route path="/login" element={<TelaLogin />} />
         <Route path="/registro" element={<NovoUsuario />} />
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/dados" element={<Results />} />
-        <Route path="/sobre" element={<Time />} />
+        <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/dados" element={<PrivateRoute><Results /></PrivateRoute>} />
+        <Route path="/sobre" element={<PrivateRoute><Time /></PrivateRoute>} />
       </Routes>
     </Router>
   );

@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, Box } from '@material-ui/core';
+import axios from 'axios';
 
-const AtividadeRecente = ({ data }) => {
+const AtividadeRecente = () => {
+  const [data, setData] = useState([]);
   const svgHeight = 200;
   const svgWidth = 300;
-  const padding = 40; 
+  const padding = 40;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/planetario/recentes');
+        const fetchedData = response.data.map(item => ({
+          time: new Date(item.dataAproximacao).toLocaleDateString(),
+          count: item.numeroDeObjetosDetectados
+        }));
+        setData(fetchedData);
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const maxX = data.length - 1;
-  const maxY = Math.max(...data.map(d => d.count));
+  const maxY = Math.max(...data.map(d => d.count), 0);
   const scaleX = (index) => padding + (index / maxX) * (svgWidth - 2 * padding);
   const scaleY = (count) => svgHeight - padding - (count / maxY) * (svgHeight - 2 * padding);
 
@@ -26,7 +45,6 @@ const AtividadeRecente = ({ data }) => {
           />
           {data.map((d, i) => (
             <text x={scaleX(i) - 10} y={svgHeight - padding + 20} fill="white" fontSize="12" key={i}>
-              {d.time}
             </text>
           ))}
           {Array.from({ length: 5 }).map((_, index) => (
