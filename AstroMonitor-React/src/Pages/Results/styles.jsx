@@ -50,7 +50,7 @@ export const useStyles = makeStyles({
     background: 'transparent',
     border: 'none',
     cursor: 'pointer',
-    zIndex: 2000 // Garanta que esteja acima do conteúdo do SolarSystem
+    zIndex: 2000
   },
   fullScreen: {
     width: '100%',

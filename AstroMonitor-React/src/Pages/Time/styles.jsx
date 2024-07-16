@@ -52,7 +52,7 @@ export const useStyles = makeStyles({
     background: 'transparent',
     border: 'none',
     cursor: 'pointer',
-    zIndex: 2000 // Garanta que esteja acima do conteúdo do SolarSystem
+    zIndex: 2000
   },
   title: {
     fontSize: 30,
