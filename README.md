@@ -111,4 +111,8 @@ A API de Objetos Próximos à Terra da NASA (NEO) fornece informações sobre as
 
 ## Documentação de processos
 
-A documentação com o processos utilizados no desenvolvimento esta em `docs/` junto com os materias de Design
+A documentação com o processos utilizados no desenvolvimento esta em `docs/` junto com os materias de Design.
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](https://github.com/nicolaslopess/AstroMonitor/blob/main/LICENSE) para mais detalhes.
