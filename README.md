@@ -40,9 +40,8 @@ O AstroMonitor é um aplicativo desenvolvido em Java que utiliza a API de Objeto
 1. Crie um banco de dados MySQL:
     ```sql
     CREATE DATABASE astromonitor;
-2. Importe o script schema.sql localizado na pasta db para criar as tabelas necessárias:
-      ```bash
-    mysql -u seu-usuario -p astromonitor < db/schema.sql
+2. Utilize o script database_schema.sql para criar as tabelas necessárias:
+
 3. Configure as credenciais de acesso ao banco de dados no arquivo `config.properties`.
 
 ## Instalação e Configuração do Apache Tomcat
