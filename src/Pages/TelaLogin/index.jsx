@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useStyles } from './styles';
 import Senha from '../../Componentes/Senha';
 import axios from 'axios';
-import axios from 'axios';
 
 const TelaLogin = () => {
   const styles = useStyles();
@@ -31,27 +30,7 @@ const TelaLogin = () => {
   const fazerLogin = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/api/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // Ajuste aqui: mudando as chaves para 'login' e 'senha'
-        body: JSON.stringify({ login: usuario, senha: senha }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Failed to login:', errorData.message);
-        setError(errorData.message);
-        setLoading(false);
-        return;
-      }
-
-      const data = await response.json();
-      console.log('Login successful', data);
-      setLoading(false);
-      return {
+      const data = {
         login: usuario,
         senha: senha
       };
@@ -71,9 +50,8 @@ const TelaLogin = () => {
     } catch (error) {
       setError('Login falhou. Por favor, verifique suas credenciais.');
     }
+    setLoading(false);
   };
-
-
 
   const registrarUsuario = () => {
     navigate('/registro');
