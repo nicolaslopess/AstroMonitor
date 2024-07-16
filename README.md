@@ -131,8 +131,7 @@ A documentação com o processos utilizados no desenvolvimento esta em `docs/` j
 
 Para instalar todas as dependências listadas, você pode executar o seguinte comando no terminal na pasta raiz do seu projeto:
 
-``bash
-npm install @material-ui/core @material-ui/icons axios @react-three/fiber @react-three/drei lodash
+    npm install @material-ui/core @material-ui/icons axios @react-three/fiber @react-three/drei lodash
 
 ## Licença
 
