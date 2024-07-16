@@ -16,7 +16,7 @@ Projeto desenvolvido pelos integrantes:
 
 - Larissa Joana Helfer (Dev Front-end)
 - Nicolas Lopes Redieske (Dev Back-end)
-- Ryan dos Reis Marques (Design Front-end)
+- Ryan dos Reis Marques (Design, Dev Front-end)
 - Vitor Rafael Miorando (Dev Back-end)
 
 ## Menu de Navegação
