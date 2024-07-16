@@ -14,7 +14,7 @@ O AstroMonitor é um aplicativo desenvolvido em Java que utiliza a API de Objeto
 
 Projeto desenvolvido pelos integrantes:
 
-- Larissa Helfer (Dev Front-end)
+- Larissa Joana Helfer (Dev Front-end)
 - Nicolas Lopes Redieske (Dev Back-end)
 - Ryan dos Reis Marques (Design Front-end)
 - Vitor Rafael Miorando (Dev Back-end)
@@ -112,6 +112,27 @@ A API de Objetos Próximos à Terra da NASA (NEO) fornece informações sobre as
 ## Documentação de processos
 
 A documentação com o processos utilizados no desenvolvimento esta em `docs/` junto com os materias de Design.
+
+## Bibliotecas usadas no Front-end
+
+- **@material-ui/core**: Usado para componentes UI como `Box`, `Button`, `Typography`, `Table`, e mais. Este pacote fornece os componentes React baseados no design do Material Design.
+- **@material-ui/icons**: Fornece ícones do Material Design que são usados em vários lugares do UI, como botões e menus.
+- **axios**: Utilizado para fazer requisições HTTP para comunicar-se com APIs externas, como a API NASA no projeto.
+- **@react-three/fiber**: Uma biblioteca React renderer para três.js que permite a construção de cenas 3D de maneira declarativa.
+- **@react-three/drei**: Uma coleção de abstrações reutilizáveis e prontas para uso que complementam @react-three/fiber, como `OrbitControls`, `Stars`, e `useTexture`.
+- **lodash**: Uma biblioteca JavaScript moderna que fornece utilitários modulares para melhorar a eficiência do código, como a função `random` para gerar números aleatórios.
+
+## Dependências adicionais
+
+- **react-router-dom**: (Se você estiver usando roteamento) Utilizado para gerenciar as rotas na aplicação React.
+- **react-redux** e **redux**: (Se você estiver usando gerenciamento de estado global) Usados para gerenciar o estado em toda a aplicação de forma mais eficiente.
+
+## Como instalar as dependências
+
+Para instalar todas as dependências listadas, você pode executar o seguinte comando no terminal na pasta raiz do seu projeto:
+
+``bash
+npm install @material-ui/core @material-ui/icons axios @react-three/fiber @react-three/drei lodash
 
 ## Licença
 
