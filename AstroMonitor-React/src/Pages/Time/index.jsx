@@ -3,10 +3,10 @@ import { Box, Typography, List, ListItem, ListItemAvatar, ListItemText, Avatar, 
 import MenuLateral from '../../Componentes/MenuLateral';
 import { Email as EmailIcon, WhatsApp as WhatsAppIcon } from '@material-ui/icons';
 import { useStyles } from './styles';
-import larrisaImg from '../../Assets/LarissaImg.jpeg';
-import nicolasImg from '../../Assets/NicolasImg.jpeg';
-import ryanImg from '../../Assets/RyanImg.jpg';
-import victorImg from '../../Assets/Victor.jpg';
+import anaImg from '../../Assets/Ana.webp';
+import carlosImg from '../../Assets/Carlos.webp';
+import matheusImg from '../../Assets/Matheus.webp';
+import rafaelImg from '../../Assets/Rafael.webp';
 
 const Time = () => {
   const styles = useStyles();
@@ -17,10 +17,10 @@ const Time = () => {
   };
 
   const integrantes = [
-    { nome: 'Larissa Joana Helfer', celular: '(51) 99570-6104', email: 'larissahelfer@mx2.unisc.br', semestre: 'Larissa tem um grande interesse em desenvolvimento web e design de interfaces. Ela gosta de trabalhar com React e tem experiência em criar interfaces de usuário intuitivas e eficientes', img: larrisaImg },
-    { nome: 'Nicolas Lopes Redieske', celular: '(51) 99517-0299', email: 'nicolaslopes3@mx2.unisc.br', semestre: 'Nicolas é apaixonado por segurança da informação e redes. Ele está sempre atualizado com as últimas tendências em segurança cibernética e tem um bom entendimento de protocolos de rede e criptografia', img: nicolasImg },
-    { nome: 'Ryan dos Reis Marques', celular: '(51) 99610-4130', email: 'ryanreis@mx2.unisc.br', semestre: 'Ryan tem um grande interesse em front-end, UI/UX e Work OSs, desenvolvendo soluções digitais para resolução de problemas.', img: ryanImg },
-    { nome: 'Vitor Rafael Miorando', celular: '(51) 99502-4339', email: 'miorando1@mx2.unisc.br', semestre: 'Gosto de computação porque adoro programar e resolver problemas. Também curto explorar novas tecnologias e aprender coisas novas. Ver um código funcionar depois de muito esforço é muito satisfatório.', img: victorImg },
+    { nome: 'Ana Silva', celular: '(51) 99773-6700', email: 'ana87S@hotmail.com.br', semestre: 'Apaixonada por melhorar a usabilidade e acessibilidade dos produtos digitais. Dedica-se a participar de workshops sobre UX e design inclusivo', img: anaImg },
+    { nome: 'Carlos Eduardo Rocha', celular: '(51) 99812-1239', email: 'carlos_12@gmail.com', semestre: 'Focado em aprender mais sobre arquiteturas de microserviços e segurança cibernética.', img: carlosImg },
+    { nome: 'Matheus Gomes', celular: '(51) 99165-9752', email: 'matGomes@hotmail.com.br', semestre: 'Interessado em expandir suas habilidades em automação de testes e inteligência artificial aplicada a testes.', img: matheusImg },
+    { nome: 'Rafael Nunes', celular: '(51) 99242-1753', email: 'rafaNunes11@gmail.com', semestre: 'Explorar novas tendências em animação e design gráfico. Interessado em tecnologias de realidade aumentada.', img: rafaelImg },
   ];
 
   return (
@@ -44,7 +44,7 @@ const Time = () => {
             {integrantes.map((integrante, index) => (
               <ListItem key={index} alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar alt={integrante.nome} src={integrante.img} style={{ marginRight:10, width: 100, height: 100, fontSize: 18 }} />
+                  <Avatar alt={integrante.nome} src={integrante.img} style={{ marginRight: 10, width: 100, height: 100, fontSize: 18 }} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={integrante.nome}
@@ -53,13 +53,13 @@ const Time = () => {
                       <label component="span" variant="body2" color="textPrimary">
                         {integrante.semestre}
                       </label>
-                      <Box style={{display:"flex", marginTop: 10}} alignItems="center" mt={1}>
-                        <WhatsAppIcon fontSize="small" style={{color:"green"}} />
+                      <Box style={{ display: "flex", marginTop: 10 }} alignItems="center" mt={1}>
+                        <WhatsAppIcon fontSize="small" style={{ color: "green" }} />
                         <label style={{ marginLeft: 8 }}>
                           {integrante.celular}
                         </label>
                       </Box>
-                      <Box style={{display:"flex", marginTop:5}} alignItems="center" mt={1}>
+                      <Box style={{ display: "flex", marginTop: 5 }} alignItems="center" mt={1}>
                         <EmailIcon fontSize="small" />
                         <label style={{ marginLeft: 8 }}>
                           {integrante.email}

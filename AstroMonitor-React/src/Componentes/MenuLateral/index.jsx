@@ -10,6 +10,12 @@ const MenuLateral = ({ isOpen, toggleSidebar }) => {
     navigate(path);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    toggleSidebar();
+    navigate('/login');
+  };
+
   return (
     <Drawer anchor="left" open={isOpen} onClose={toggleSidebar}>
       <List>
@@ -18,14 +24,11 @@ const MenuLateral = ({ isOpen, toggleSidebar }) => {
         </ListItem>
         <ListItem button onClick={() => handleNavigate('/dados')}>
           <ListItemText primary="Dados" />
-        </ListItem>
-        <ListItem button onClick={() => handleNavigate('/login')}>
-          <ListItemText primary="Acesso" />
-        </ListItem>
+        </ListItem>        
         <ListItem button onClick={() => handleNavigate('/sobre')}>
           <ListItemText primary="Sobre" />
         </ListItem>
-        <ListItem button onClick={() => { window.location.href = '/'; }}>
+        <ListItem button onClick={handleLogout}>
           <ListItemText primary="Sair" />
         </ListItem>
       </List>

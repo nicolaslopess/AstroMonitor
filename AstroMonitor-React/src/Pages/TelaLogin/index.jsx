@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography, Container, TextField, CircularProgress } from '@material-ui/core';
-import Api, { exceptionNotificationAPI } from '../../Api';
 import { useNavigate } from 'react-router-dom';
 import { useStyles } from './styles';
 import Senha from '../../Componentes/Senha';
@@ -29,45 +28,30 @@ const TelaLogin = () => {
   };
 
   const fazerLogin = async () => {
-    if (!usuario || !senha) {
-      setError('Por favor, preencha todos os campos necessários.');
-      return;
-    }
-
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/api/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // Ajuste aqui: mudando as chaves para 'login' e 'senha'
-        body: JSON.stringify({ login: usuario, senha: senha }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Failed to login:', errorData.message);
-        setError(errorData.message);
-        setLoading(false);
-        return;
-      }
-
-      const data = await response.json();
-      console.log('Login successful', data);
-      setLoading(false);
-      return {
+      const data = {
         login: usuario,
-        senha: senha,
+        senha: senha
       };
+      const response = await axios.post('http://localhost:8080/api/user/login', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Resposta do servidor:', response);
+      const token = response.data.token;
+      if (token) {
+        localStorage.setItem('authToken', token);
+        navigate('/');
+      } else {
+        setError('Token não encontrado na resposta.');
+      }
     } catch (error) {
-      console.error('Error logging in', error);
-      setError('Login failed due to an error.');
-      setLoading(false);
+      setError('Login falhou. Por favor, verifique suas credenciais.');
     }
+    setLoading(false);
   };
-
-
 
   const registrarUsuario = () => {
     navigate('/registro');
@@ -99,13 +83,14 @@ const TelaLogin = () => {
         >
           {loading ? <CircularProgress size={24} /> : 'Entrar'}
         </Button>
+        {error && <Typography color="error" variant="body2">{error}</Typography>}
         <Button
           variant="text"
           onClick={registrarUsuario}
           fullWidth
           style={{ marginTop: 8 }}
         >
-          Não possui uma conta? Cadastra-se aqui
+          Não possui uma conta? Registre-se aqui
         </Button>
       </Box>
     </Container>
